@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import time
 
-
 class USBCamera():
 
     def __init__(self) -> None:
@@ -301,9 +300,9 @@ try:
 except:
     pass
 
-
 try:
     from openni import openni2
+
 
     class Orbbec():
 
@@ -319,10 +318,8 @@ try:
             cams = []
             device = 0
             openni2.initialize()
-            #urls = openni2.Device.enumerate_uris()
-            #if urls!=[]:
-
-             #print(f"urls={urls}")
+            urls = openni2.Device.enumerate_uris()
+            print(f"urls={urls}")
             cams.append({
                 'cls': cls,
                 'dev': device,
@@ -331,7 +328,7 @@ try:
             openni2.unload()
 
             return cams
-    
+
         def open_camera(self, cam) -> bool:
             openni2.initialize()
             self.dev = openni2.Device.open_any()
@@ -347,7 +344,7 @@ try:
 
         def get_camera_frame(self) -> tuple:
             assert self.opened, "camera not open"
-            ret,frame = self.cap.read()
+            ret, frame = self.cap.read()
             return frame
 except:
     pass
